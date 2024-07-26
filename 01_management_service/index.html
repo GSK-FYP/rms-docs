@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Management - RMS-DOCS</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Management";
+        var mkdocs_page_input_path = "01_management_service.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> RMS-DOCS
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Management</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#tenants">Tenants</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#get-tenants">GET /tenants/</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#post-tenants">POST /tenants/</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#post-tenantscreate-all">POST /tenants/create-all</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#patch-tenantstenant_id">PATCH /tenants/{tenant_id}</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#delete-tenantstenant_id">DELETE /tenants/{tenant_id}</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#mmda">MMDA</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#get-mmdastenant_name">GET /mmdas/{tenant_name}</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#post-mmdas">POST /mmdas/</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#geometry">Geometry</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#get-geometrybusinesstenant_name">GET /geometry/business/{tenant_name}</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-geometrybuildingstenant_name">GET /geometry/buildings/{tenant_name}</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-geometrymmdatenant_name">GET /geometry/mmda/{tenant_name}</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#super-admins">Super Admins</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#get-super-admins">GET /super-admins/</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#post-super-admins">POST /super-admins/</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#post-super-adminsauthenticate">POST /super-admins/authenticate</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-super-adminscurrent">GET /super-admins/current</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#patch-super-adminscurrent">PATCH /super-admins/current</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-super-adminssuper_admin_id">GET /super-admins/{super_admin_id}</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#users">Users</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#get-users">GET /users/</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#post-users">POST /users/</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-usersuser_id">GET /users/{user_id}</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#buildings">Buildings</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#get-buildings">GET /buildings/</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#post-buildings">POST /buildings/</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-buildingsbuilding_id">GET /buildings/{building_id}</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#patch-buildingsbuilding_id">PATCH /buildings/{building_id}</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-buildingsbuilding_idbusinesses">GET /buildings/{building_id}/businesses</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#businesses">Businesses</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#get-businesses">GET /businesses/</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#post-businesses">POST /businesses/</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-businessesbusiness_id">GET /businesses/{business_id}</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#patch-businessesbusiness_id">PATCH /businesses/{business_id}</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-businessestenant_name">GET /businesses/{tenant_name}</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#root">Root</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#get">GET /</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">RMS-DOCS</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
+      <li>Management</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="management-service-route-documentation">Management Service Route Documentation</h1>
+<h2 id="tenants">Tenants</h2>
+<h3 id="get-tenants">GET /tenants/</h3>
+<ul>
+<li>Description: Get list of tenants</li>
+<li>Security: Super Admins</li>
+<li>Response: Array of Tenant objects</li>
+</ul>
+<h3 id="post-tenants">POST /tenants/</h3>
+<ul>
+<li>Description: Create a new tenant</li>
+<li>Security: Super Admins</li>
+<li>Request Body: TenantCreate
+  <code>json
+  {
+    "host_name": "string",
+    "name": "string",
+    "schema": "string"
+  }</code></li>
+<li>Response: Tenant object</li>
+</ul>
+<h3 id="post-tenantscreate-all">POST /tenants/create-all</h3>
+<ul>
+<li>Description: Create tenants with data</li>
+<li>Security: Super Admins</li>
+<li>Response: Empty object</li>
+</ul>
+<h3 id="patch-tenantstenant_id">PATCH /tenants/{tenant_id}</h3>
+<ul>
+<li>Description: Update tenant</li>
+<li>Security: Super Admins</li>
+<li>Path Parameters:</li>
+<li>tenant_id: UUID</li>
+<li>Request Body: TenantUpdate
+  <code>json
+  {
+    "name": "string",
+    "host_name": "string"
+  }</code></li>
+<li>Response: Tenant object</li>
+</ul>
+<h3 id="delete-tenantstenant_id">DELETE /tenants/{tenant_id}</h3>
+<ul>
+<li>Description: Delete tenant</li>
+<li>Security: Super Admins</li>
+<li>Path Parameters:</li>
+<li>tenant_id: UUID</li>
+<li>Response: Empty object</li>
+</ul>
+<h2 id="mmda">MMDA</h2>
+<h3 id="get-mmdastenant_name">GET /mmdas/{tenant_name}</h3>
+<ul>
+<li>Description: Get MMDA boundary</li>
+<li>Path Parameters:</li>
+<li>tenant_name: string</li>
+<li>Response: MMDAGeom object</li>
+</ul>
+<h3 id="post-mmdas">POST /mmdas/</h3>
+<ul>
+<li>Description: Add MMDA</li>
+<li>Query Parameters:</li>
+<li>name (required): string</li>
+<li>Response: Empty object</li>
+</ul>
+<h2 id="geometry">Geometry</h2>
+<h3 id="get-geometrybusinesstenant_name">GET /geometry/business/{tenant_name}</h3>
+<ul>
+<li>Description: Get businesses geometry</li>
+<li>Path Parameters:</li>
+<li>tenant_name: string</li>
+<li>Response: Array of BusinessGeom objects</li>
+</ul>
+<h3 id="get-geometrybuildingstenant_name">GET /geometry/buildings/{tenant_name}</h3>
+<ul>
+<li>Description: Get buildings geometry</li>
+<li>Path Parameters:</li>
+<li>tenant_name: string</li>
+<li>Response: Array of BuildingGeom objects</li>
+</ul>
+<h3 id="get-geometrymmdatenant_name">GET /geometry/mmda/{tenant_name}</h3>
+<ul>
+<li>Description: Get MMDA boundary</li>
+<li>Path Parameters:</li>
+<li>tenant_name: string</li>
+<li>Response: MMDAGeom object</li>
+</ul>
+<h2 id="super-admins">Super Admins</h2>
+<h3 id="get-super-admins">GET /super-admins/</h3>
+<ul>
+<li>Description: Get list of super admins</li>
+<li>Security: Super Admins</li>
+<li>Response: Array of SuperAdmin objects</li>
+</ul>
+<h3 id="post-super-admins">POST /super-admins/</h3>
+<ul>
+<li>Description: Create super admin</li>
+<li>Request Body: SuperAdminCreate
+  <code>json
+  {
+    "name": "string",
+    "username": "string",
+    "email": "string",
+    "password": "string"
+  }</code></li>
+<li>Response: SuperAdmin object</li>
+</ul>
+<h3 id="post-super-adminsauthenticate">POST /super-admins/authenticate</h3>
+<ul>
+<li>Description: Log in for access token</li>
+<li>Request Body: Form data</li>
+<li>username: string</li>
+<li>password: string</li>
+<li>Response: Token object</li>
+</ul>
+<h3 id="get-super-adminscurrent">GET /super-admins/current</h3>
+<ul>
+<li>Description: Get currently authenticated super admin details</li>
+<li>Security: Super Admins</li>
+<li>Response: SuperAdmin object</li>
+</ul>
+<h3 id="patch-super-adminscurrent">PATCH /super-admins/current</h3>
+<ul>
+<li>Description: Update current super admin</li>
+<li>Security: Super Admins</li>
+<li>Request Body: SuperAdminUpdate
+  <code>json
+  {
+    "name": "string",
+    "email": "string",
+    "username": "string",
+    "password": "string"
+  }</code></li>
+<li>Response: SuperAdmin object</li>
+</ul>
+<h3 id="get-super-adminssuper_admin_id">GET /super-admins/{super_admin_id}</h3>
+<ul>
+<li>Description: Get super admin</li>
+<li>Security: Super Admins</li>
+<li>Path Parameters:</li>
+<li>super_admin_id: UUID</li>
+<li>Response: SuperAdmin object</li>
+</ul>
+<h2 id="users">Users</h2>
+<h3 id="get-users">GET /users/</h3>
+<ul>
+<li>Description: Get users</li>
+<li>Query Parameters:</li>
+<li>tenant_name (required): string</li>
+<li>dependencies: any</li>
+<li>Response: Array of User objects</li>
+</ul>
+<h3 id="post-users">POST /users/</h3>
+<ul>
+<li>Description: Create user</li>
+<li>Query Parameters:</li>
+<li>tenant_name (required): string</li>
+<li>dependencies: any</li>
+<li>Request Body: UserCreate
+  <code>json
+  {
+    "surname": "string",
+    "other_names": "string",
+    "tax_identification_number": "integer",
+    "title": "Mr. | Mrs. | Miss",
+    "address": "string",
+    "digital_address": "string",
+    "phone_number": "string",
+    "email": "string",
+    "national_id": "string"
+  }</code></li>
+<li>Response: User object</li>
+</ul>
+<h3 id="get-usersuser_id">GET /users/{user_id}</h3>
+<ul>
+<li>Description: Get user assets</li>
+<li>Path Parameters:</li>
+<li>user_id: UUID</li>
+<li>Query Parameters:</li>
+<li>tenant_name (required): string</li>
+<li>dependencies: any</li>
+<li>Response: User object</li>
+</ul>
+<h2 id="buildings">Buildings</h2>
+<h3 id="get-buildings">GET /buildings/</h3>
+<ul>
+<li>Description: Get buildings</li>
+<li>Query Parameters:</li>
+<li>tenant_name (required): string</li>
+<li>limit (optional): integer, default: 10, max: 100</li>
+<li>Response: Array of Property objects</li>
+</ul>
+<h3 id="post-buildings">POST /buildings/</h3>
+<ul>
+<li>Description: Create building</li>
+<li>Query Parameters:</li>
+<li>tenant_name (required): string</li>
+<li>spatial_building_id (required): integer or null</li>
+<li>dependencies: any</li>
+<li>Request Body: PropertyCreate</li>
+<li>Response: Empty object</li>
+</ul>
+<h3 id="get-buildingsbuilding_id">GET /buildings/{building_id}</h3>
+<ul>
+<li>Description: Get building details</li>
+<li>Path Parameters:</li>
+<li>building_id: UUID</li>
+<li>Query Parameters:</li>
+<li>tenant_name (required): string</li>
+<li>Response: Property object</li>
+</ul>
+<h3 id="patch-buildingsbuilding_id">PATCH /buildings/{building_id}</h3>
+<ul>
+<li>Description: Update building details</li>
+<li>Security: Super Admins</li>
+<li>Path Parameters:</li>
+<li>building_id: UUID</li>
+<li>Query Parameters:</li>
+<li>tenant_name (required): string</li>
+<li>Request Body: PropertyUpdate</li>
+<li>Response: Property object</li>
+</ul>
+<h3 id="get-buildingsbuilding_idbusinesses">GET /buildings/{building_id}/businesses</h3>
+<ul>
+<li>Description: Get businesses in building</li>
+<li>Path Parameters:</li>
+<li>building_id: UUID</li>
+<li>Query Parameters:</li>
+<li>tenant_name (required): string</li>
+<li>Response: Array of Business objects</li>
+</ul>
+<h2 id="businesses">Businesses</h2>
+<h3 id="get-businesses">GET /businesses/</h3>
+<ul>
+<li>Description: Get businesses</li>
+<li>Query Parameters:</li>
+<li>tenant_name (required): string</li>
+<li>limit (optional): integer, default: 10, max: 100</li>
+<li>Response: Array of Business objects</li>
+</ul>
+<h3 id="post-businesses">POST /businesses/</h3>
+<ul>
+<li>Description: Create business</li>
+<li>Query Parameters:</li>
+<li>tenant_name (required): string</li>
+<li>spatial_building_id (required): integer or null</li>
+<li>Request Body: BusinessCreate</li>
+<li>Response: Empty object</li>
+</ul>
+<h3 id="get-businessesbusiness_id">GET /businesses/{business_id}</h3>
+<ul>
+<li>Description: Get business details</li>
+<li>Path Parameters:</li>
+<li>business_id: UUID</li>
+<li>Query Parameters:</li>
+<li>tenant_name (required): string</li>
+<li>Response: Business object</li>
+</ul>
+<h3 id="patch-businessesbusiness_id">PATCH /businesses/{business_id}</h3>
+<ul>
+<li>Description: Update business details</li>
+<li>Path Parameters:</li>
+<li>business_id: UUID</li>
+<li>Query Parameters:</li>
+<li>tenant_name (required): string</li>
+<li>Request Body: BusinessUpdate</li>
+<li>Response: Business object</li>
+</ul>
+<h3 id="get-businessestenant_name">GET /businesses/{tenant_name}</h3>
+<ul>
+<li>Description: Get businesses geometry</li>
+<li>Path Parameters:</li>
+<li>tenant_name: string</li>
+<li>Response: Array of BusinessGeom objects</li>
+</ul>
+<h2 id="root">Root</h2>
+<h3 id="get">GET /</h3>
+<ul>
+<li>Description: Ping (health check)</li>
+<li>Response: Empty object</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href=".." class="btn btn-neutral float-left" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
